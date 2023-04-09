@@ -47,7 +47,7 @@ digital chips.
 > ## __Change Line Code__
 * To change which line code to use, change variable ``choose`` to any value from {1 to 3}
 ```MATLAB
-    %%%%%%%% change this line according to line coding %%%%%%%%
+%%%%%%%% change this line according to line coding %%%%%%%%
 choose = 1;                                         % choose which line code to use (1. polar NRZ, 2. unipolar NRZ, 3. polar RZ)
 switch choose
     case 1
