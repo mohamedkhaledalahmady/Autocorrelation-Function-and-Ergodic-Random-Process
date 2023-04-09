@@ -22,6 +22,7 @@ digital chips.
 
 > ## _Result Figures_
 1. Polar NRZ
+
 ![Stati_ACF_Polar_NRZ_10000_ensemble](https://user-images.githubusercontent.com/67025780/230783949-e6913b3d-3675-4697-acdd-6943dc183663.png)
 
 
@@ -29,8 +30,11 @@ digital chips.
 2. Unipolar NRZ
 
 
+![Stati_ACF_‘ىهPolar_NRZ_10000_ensemble](https://user-images.githubusercontent.com/67025780/230784327-35f18703-d795-483b-b8f5-e3334b9cc8e6.png)
+
 
 3. Polar RZ
+
 
 
 > ## __Change Line Code__
