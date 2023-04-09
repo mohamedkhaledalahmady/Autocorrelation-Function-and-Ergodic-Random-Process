@@ -32,6 +32,9 @@ digital chips.
 2. Unipolar NRZ
 
 
+![ACF   PSD UniPolar NRZ for 10000 ensemble](https://user-images.githubusercontent.com/67025780/230786811-c3c4d177-ca32-4ebc-89c8-8f77000d1c29.png)
+
+
 
 
 3. Polar RZ
