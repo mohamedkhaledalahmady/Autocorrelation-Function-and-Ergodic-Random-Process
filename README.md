@@ -21,6 +21,7 @@ digital chips.
    * _Result Figures._
 
 > ## _Result Figures_
+* By applying 10000 Realizations, get these results
 1. Polar NRZ
 
 ![ACF   PSD Polar NRZ for 10000 ensemble](https://user-images.githubusercontent.com/67025780/230786527-0d4acd7b-ac61-47cc-a00a-1a6ffa94b4a3.png)
@@ -41,7 +42,7 @@ digital chips.
 * To change which line code to use, change variable ``choose`` to any value from {1 to 3}
 ```MATLAB
     %%%%%%%% change this line according to line coding %%%%%%%%
-choose = 1;                                   % choose which line code to use (1. polar NRZ, 2. unipolar NRZ, 3. polar RZ)
+choose = 1;                                         % choose which line code to use (1. polar NRZ, 2. unipolar NRZ, 3. polar RZ)
 switch choose
     case 1
         data=(2*data-1)*A;                          % mapping to A & -A (Polar NRZ)
