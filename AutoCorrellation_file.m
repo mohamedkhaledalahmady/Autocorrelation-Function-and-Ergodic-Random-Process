@@ -4,7 +4,7 @@ clc
 close all
 %% Generate Ensample
 A=4;                                                                    % Amplitude Value
-number_of_enamples=10000;                                               % total number of Realizations
+number_of_enamples=500;                                                 % total number of Realizations
 number_of_bits=100;                                                     % number of bits in each Realization
 number_of_samples_per_bit=7;                                            % number of samples for each bit
 number_of_samples=number_of_bits*number_of_samples_per_bit;             % total number of samples for each Realization
@@ -16,6 +16,18 @@ for i = 1 : number_of_enamples
 else
     Total_Transmitted_Data = [Total_Transmitted_Data; Generate_Random_Data()];
     end
+end
+%% Plot Waveforms
+time=(1:1:number_of_samples);
+figure
+for i = 1 : 5
+    subplot(5,1,i)
+    plot(time, Total_Transmitted_Data(i,:), 'b', "LineWidth",1.5)
+    xlabel("Time (10*ms)")
+    ylabel("Voltage (V)")
+    title("Transmitted Signal")
+    grid on
+    xlim([0 200])
 end
 %% Calculate Statistical Mean
 Statistical_Mean = sum(Total_Transmitted_Data)/number_of_enamples;
@@ -35,7 +47,6 @@ for i = 1 : number_of_samples
 end
 average=[fliplr(average) average];
 figure
-subplot(1,2,1)
 plot((-number_of_samples:(number_of_samples-1)), average)
 grid on
 xlabel("Taw")
@@ -47,13 +58,14 @@ ylim([-A^2+5 A^2+5])
 %%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
 PSD = fftshift(fft(average));
 N = length(PSD);                                % Number of samples
-freq = (-N/2+1:N/2)*(1/(N));                % Frequency axis (Hz)
-subplot(1,2,2)
+Ts=0.01;                                        % sample bit every 10ms
+Fs=1/Ts;                                        % sampling frequency
+freq = (-N/2+1:N/2)*(Fs/(N));                   % Frequency axis (Hz)
+figure
 plot(freq, abs(PSD));                 
 xlabel('Frequency (Hz)');
 ylabel('Magnitude');
 title('PSD of Transmitted Signal');
-grid on
 %%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
 %% Calculate Time Average Mean
 % Time_Mean = zeros(1, number_of_enamples);
