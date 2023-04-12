@@ -33,9 +33,9 @@ end
 Statistical_Mean = sum(Total_Transmitted_Data)/number_of_enamples;
 % Statistical_Mean = mean(Total_Transmitted_Data);
 figure
-plot(Statistical_Mean)
+plot(0:10:(number_of_samples-1)*10,Statistical_Mean)
 grid on
-xlabel("Time")
+xlabel("Time (ms)")
 ylabel("Statistical Mean")
 title("Statistical Mean")
 ylim([-10 10])
@@ -45,14 +45,14 @@ average=zeros(1, number_of_samples);  % 1x700
 for i = 1 : number_of_samples
     average(1,i) = mean(Total_Transmitted_Data(:,1) .* Total_Transmitted_Data(:,i));
 end
-average=[fliplr(average) average];
+average=[fliplr(average(1, 2:end)) average];
 figure
-plot((-number_of_samples:(number_of_samples-1)), average)
+plot(((-number_of_samples+1)*10:10:(number_of_samples-1)*10), average)
 grid on
-xlabel("Taw")
+xlabel("Taw (ms)")
 ylabel("ACF")
 title("Statistical ACF")
-xlim([-25 25])
+xlim([-200 200])
 ylim([-A^2+5 A^2+5])
 %% Calculate PSD 
 %%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
@@ -87,15 +87,14 @@ for i = 1 : number_of_samples
     Time_Auto_Corr(i)=sum(result)/length(result);
 end
 
-Time_Auto_Corr=[fliplr(Time_Auto_Corr) Time_Auto_Corr];
+Time_Auto_Corr=[fliplr(Time_Auto_Corr(1, 2:end)) Time_Auto_Corr];
 figure
-plot((-(number_of_samples-1):number_of_samples), Time_Auto_Corr)
-%plot([0:number_of_samples-1],Auto_Corr)
+plot(((-number_of_samples+1)*10:10:(number_of_samples-1)*10), Time_Auto_Corr)
 grid on
-xlabel("Taw")
+xlabel("Taw (ms)")
 ylabel("Time Average Autocorrelation")
 title("Time Average ACF")
-xlim([-50 50])
+xlim([-200 200])
 ylim([-A^2+5 A^2+5])
 %%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
 %% Generate Random Data
@@ -105,7 +104,7 @@ number_of_bits=100;                         % number of bits in each realization
 number_of_samples=7;                        % number of samples for each bit
 data=randi(2,[1,number_of_bits+1])-1;       % generate 1x100 random numbers '0' or '1' 
 %%%%%%%% change this line according to line coding %%%%%%%%
-choose = 3;                                   % choose which line code to use (1. polar NRZ, 2. unipolar NRZ, 3. polar RZ)
+choose = 1;                                   % choose which line code to use (1. polar NRZ, 2. unipolar NRZ, 3. polar RZ)
 switch choose
     case 1
         data=(2*data-1)*A;                          % mapping to A & -A (Polar NRZ)
@@ -121,7 +120,11 @@ end
 %%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
 data=data(:);                               % convert data to column vector 700x1
 %% Generate random time shift
-td=randi(number_of_samples)-1;              % generate random number from 0 to 6
+if choose ~= 3
+    td=randi(number_of_samples)-1;              % generate random number from 0 to 6
+else
+    td=randi(4)-1;                              % generate random number from 0 to 3
+end
 %% Concatenate with Random Data
 data_transmitted = (data(td+1:700+td))';    % window data from td to 700+td (700 samples)
 end
